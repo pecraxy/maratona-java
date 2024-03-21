@@ -12,7 +12,7 @@ public class MethodReferenceTest04 {
     public static void main(String[] args) {
         Supplier<AnimeComparators> newAnimeComparator = AnimeComparators::new;
         AnimeComparators animeComparators = newAnimeComparator.get();
-        List<Anime> animeList = new ArrayList<>(List.of(new Anime("Bersek", 43), new Anime("Shangri La frontiers", 15), new Anime("Naruto SHippuden", 578)));
+        List<Anime> animeList = new ArrayList<>(List.of(new Anime("Berserk", 43), new Anime("Shangri La frontiers", 15), new Anime("Naruto SHippuden", 578)));
         animeList.sort(animeComparators::compareByEpisodesNonStatic);
         System.out.println(animeList);
 
