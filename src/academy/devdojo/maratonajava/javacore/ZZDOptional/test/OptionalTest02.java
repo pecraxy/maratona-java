@@ -10,7 +10,10 @@ public class OptionalTest02 {
         Optional<Manga> mangaByTitle = MangaRepository.findByTitle("Dragon Ball Z");
         mangaByTitle.ifPresent(manga -> manga.setTitle("Dragon Ball Z Kai"));
         System.out.println(mangaByTitle);
-        //
-        //MangaRepository.findById(3).ifPresentOrElse();
+        Manga manga = MangaRepository.findById(2).orElseThrow(IllegalArgumentException::new);
+
+        Manga mangaOrElse = MangaRepository.findByTitle("Drifters").orElseGet(() -> new Manga(3, "Drifters", 20));
+        System.out.println(mangaOrElse);
+
     }
 }
