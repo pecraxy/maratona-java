@@ -3,12 +3,10 @@ package academy.devdojo.maratonajava.javacore.ZZEStreams.test;
 import academy.devdojo.maratonajava.javacore.ZZEStreams.dominio.LightNovel;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StreamTest02 {
+public class StreamTest03 {
     private static List<LightNovel> lightNovels = new ArrayList<>(
             List.of(
                     new LightNovel("Legendary Mechanic", 8.99),
@@ -19,13 +17,12 @@ public class StreamTest02 {
             )
     );
     public static void main(String[] args) {
-
-        List<String> titles = lightNovels.stream()
-                .sorted(Comparator.comparing(LightNovel::getTitle))
-                .filter(ln -> ln.getPrice() <= 4)
-                .limit(3)
-                .map(LightNovel::getTitle)
-                .collect(Collectors.toList());
-        System.out.println(titles);
+        Stream<LightNovel> stream = lightNovels.stream();
+        lightNovels.forEach(System.out::println);
+        long count = stream
+                .distinct()
+                .filter(lightNovel -> lightNovel.getPrice() <= 4)
+                .count();
+        System.out.println(count);
     }
 }
