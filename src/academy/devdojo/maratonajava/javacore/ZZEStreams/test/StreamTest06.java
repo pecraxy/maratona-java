@@ -30,7 +30,14 @@ public class StreamTest06 {
         lightNovels
                 .stream()
                 .filter(ln -> ln.getPrice() >= 3)
+                .sorted(Comparator.comparing(LightNovel::getPrice).reversed())
                 .findFirst()
+                .ifPresent(System.out::println);
+
+        lightNovels
+                .stream()
+                .filter(ln -> ln.getPrice() >= 3)
+                .max(Comparator.comparing(LightNovel::getPrice))
                 .ifPresent(System.out::println);
     }
 }
