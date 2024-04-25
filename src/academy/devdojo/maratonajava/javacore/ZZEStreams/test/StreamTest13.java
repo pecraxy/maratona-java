@@ -5,13 +5,12 @@ import academy.devdojo.maratonajava.javacore.ZZEStreams.dominio.LightNovel;
 import academy.devdojo.maratonajava.javacore.ZZEStreams.dominio.Promotion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StreamTest13 {
-    private static List<LightNovel> lightNovels = new ArrayList<>(
+    private static final List<LightNovel> lightNovels = new ArrayList<>(
             List.of(
                     new LightNovel("Legendary Mechanic", 8.99, Category.FANTASY),
                     new LightNovel("Beginning After The End", 4, Category.FANTASY),
@@ -28,6 +27,5 @@ public class StreamTest13 {
                 .collect(Collectors.groupingBy(LightNovel::getCategory,
                         Collectors.groupingBy(ln -> ln.getPrice() < 6 ? Promotion.UNDER_PROMOTION : Promotion.NORMAL_PRICE)));
         System.out.println(collect1);
-
     }
 }
