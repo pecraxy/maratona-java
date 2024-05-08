@@ -11,7 +11,7 @@ public class ThreadAccountTest01 implements Runnable {
         t2.start();
         t1.start();
     }
-    private  void withdrawal(int amount){
+    private void withdrawal(int amount){
         System.out.println(getThreadName() + " ### fora do synchronized");
         synchronized (account){
             System.out.println(getThreadName() + " *** drento do synchronized");
