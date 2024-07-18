@@ -2,27 +2,12 @@ package academy.devdojo.maratonajava.javacore.ZZGconcorrencia.Service;
 
 import java.util.concurrent.*;
 
-public class StoreService {
-    private static final ExecutorService ex = Executors.newCachedThreadPool();
+public class StoreServiceDeprecated {
     public double getPriceSync(String storeName){
         System.out.printf("Getting prices sync for store %s%n", storeName);
         return priceGenerator();
     }
 
-    public Future<Double> getPricesAsyncFuture(String storeName){
-        System.out.printf("Getting prices sync for store %s%n", storeName);
-        Future<Double> submit = ex.submit(this::priceGenerator);
-        return submit;
-    }
-
-    public CompletableFuture<Double> getPricesCompletableFuture(String storeName){
-        System.out.printf("Getting prices sync for store %s%n", storeName);
-        return CompletableFuture.supplyAsync(this::priceGenerator);
-    }
-
-    public static void shutdown(){
-        ex.shutdown();
-    }
     private double priceGenerator(){
         System.out.printf("%s generating price %n", Thread.currentThread().getName());
         this.delay();

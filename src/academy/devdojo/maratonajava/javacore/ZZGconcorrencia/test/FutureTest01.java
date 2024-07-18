@@ -3,21 +3,22 @@ package academy.devdojo.maratonajava.javacore.ZZGconcorrencia.test;
 import java.util.concurrent.*;
 
 public class FutureTest01 {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args)  {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<Double> dollarRequest = executorService.submit(() -> {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(5);
             return 5.54D;
         });
         System.out.println(doSomething());
         Double dollarResponse = null;
         try {
             dollarResponse = dollarRequest.get(3, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            System.out.println("Erro");
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
+            throw new RuntimeException(e);
+        } finally {
+            executorService.shutdown();
         }
         System.out.println(dollarResponse);
-        executorService.shutdown();
     }
     private static long doSomething(){
         System.out.println(Thread.currentThread().getName());
