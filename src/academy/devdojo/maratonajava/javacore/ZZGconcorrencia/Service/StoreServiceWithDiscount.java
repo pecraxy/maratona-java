@@ -18,7 +18,7 @@ public class StoreServiceWithDiscount {
     public String applyDiscount(Quote quote){
         delay();
         double discountValue = quote.getPrice() * (100 - quote.getDiscountCode().getPercentage()) / 100;
-        return String.format("'%s' original price: '%2.f'. Applying Discount code '%s'. Final Price: '%.2f'",
+        return String.format("'%s' original price: '%.2f'. Applying Discount code %s. Final Price: '%.2f'",
                 quote.getStoreName(),
                 quote.getPrice(),
                 quote.getDiscountCode(),
