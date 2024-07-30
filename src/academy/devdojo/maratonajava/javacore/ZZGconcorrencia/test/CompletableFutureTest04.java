@@ -30,8 +30,12 @@ public class CompletableFutureTest04 {
         List<String> stores = List.of("Marcelo Atacados", "Diva Berta", "JupoPito", "Marceludo");
 //        stores.forEach(s -> System.out.println(service.getPriceSync(s)));
         List<CompletableFuture<String>> completableFutures = stores.stream()
+                //Pegando os preços de forma assíncrona (storeName:price:discountCode)
                 .map(s -> CompletableFuture.supplyAsync(() -> service.getPriceSync(s)))
+                //Instanciando todos os Quotes de acordo com os Strings da Stream acima
                 .map(cf -> cf.thenApply(Quote::newQuote))
+                //Gere de forma síncrona, precisa esperar tudo terminar para gerar o desconto.
+                //Compondo o primeiro completable future (tem que fazer sempre depois de um .thenApply?
                 .map(cf -> cf.thenCompose(quote -> CompletableFuture.supplyAsync(() -> service.applyDiscount(quote))))
                 .toList();
 
