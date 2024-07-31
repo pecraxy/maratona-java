@@ -3,17 +3,13 @@ package academy.devdojo.maratonajava.javacore.ZZHpadroesdeprojeto.dominio;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Aircraft {
-
+public class AircraftSingletonLazy {
+    private static AircraftSingletonLazy INSTANCE;
     private final String name;
     private final Set<String> availableSeats = new HashSet<>();
 
-    public Aircraft(String name) {
+    private AircraftSingletonLazy(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     {
@@ -25,5 +21,12 @@ public class Aircraft {
         return availableSeats.remove(seat);
     }
 
-
+    public static AircraftSingletonLazy getINSTANCE(){
+        if (INSTANCE == null){
+            synchronized (AircraftSingletonLazy.class){
+                if(INSTANCE == null) INSTANCE = new AircraftSingletonLazy("3787-10");
+            }
+        }
+        return INSTANCE;
+    }
 }
