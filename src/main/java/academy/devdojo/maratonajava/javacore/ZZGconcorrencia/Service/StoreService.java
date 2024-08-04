@@ -11,8 +11,7 @@ public class StoreService {
 
     public Future<Double> getPricesAsyncFuture(String storeName){
         System.out.printf("Getting prices sync for store %s%n", storeName);
-        Future<Double> submit = ex.submit(this::priceGenerator);
-        return submit;
+        return ex.submit(this::priceGenerator);
     }
 
     public CompletableFuture<Double> getPricesCompletableFuture(String storeName){
