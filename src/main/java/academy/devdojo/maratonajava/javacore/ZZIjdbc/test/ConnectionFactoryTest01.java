@@ -15,14 +15,15 @@ public class ConnectionFactoryTest01 {
     private static final Logger log = LogManager.getLogger(ConnectionFactoryTest01.class);
 
     public static void main(String[] args) {
-        Producer producer = Producer.builder().name("Zaza Studios").build();
-        Producer producerToUpdate = Producer.builder().id(1).name("Marijuana Studios").build();
+        Producer producer = Producer.builder().name("Dj Blakes Studio").build();
+//        Producer producerToUpdate = Producer.builder().id(1).name("Marijuana Studios").build();
 //        ProducerService.save(producer);
 //        ProducerService.delete(5);
 //        ProducerService.update(producerToUpdate);
 //        List<Producer> producers = ProducerService.findAll();
 //        List<Producer> producers = ProducerService.findByName("Zaza");
 //        log.info(producers);
-        ProducerService.showProducerMetaData();
+//        ProducerService.showProducerMetaData();
+        ProducerService.showDriverMetaData();
     }
 }

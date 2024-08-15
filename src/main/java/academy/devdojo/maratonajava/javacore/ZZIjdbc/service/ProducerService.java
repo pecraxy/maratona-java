@@ -35,6 +35,9 @@ public class ProducerService {
     public static void showProducerMetaData(){
         ProducerRepository.showProducerMetaData();
     }
+    public static void showDriverMetaData(){
+        ProducerRepository.showDriverMetadata();
+    }
 
     private static void requireValidId(Integer id){
         if (id == null || id <= 0){

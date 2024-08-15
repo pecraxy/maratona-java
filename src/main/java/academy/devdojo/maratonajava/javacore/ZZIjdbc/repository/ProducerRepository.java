@@ -60,8 +60,7 @@ public class ProducerRepository {
         try (Connection conn = ConnectionFactory.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)){
-
-            while (rs.next()){
+            while (rs.next()) {
                 Producer producer = Producer.builder()
                         .id(rs.getInt("id"))
                         .name(rs.getString("name"))
@@ -72,6 +71,15 @@ public class ProducerRepository {
             log.error("Error while trying to update producers", e);
         }
         return producers;
+    }
+    public static void showTypeScrollWorking(){
+        String sql = "SELECT id, name FROM anime_store.producer";
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+        } catch (SQLException e) {
+            log.error("Error while trying to update producers", e);
+        }
     }
 
     public static void showProducerMetaData(){
@@ -100,12 +108,26 @@ public class ProducerRepository {
         try (Connection conn = ConnectionFactory.getConnection();){
             DatabaseMetaData dbMetaData = conn.getMetaData();
             if (dbMetaData.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)){
+                //significa que o cursor pode ir pra uma direção
                 log.info("Supports TYPE_FOWARD_ONLY");
                 if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)){
                     log.info("And Supports CONCUR_UPDATABLE");
                 }
             }
-
+            if (dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)){
+                //significa que o cursor pode ir pra mais de uma direção, não é sensitivo,
+                log.info("Supports TYPE_SCROLL_INSENSITIVE");
+                if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)){
+                    log.info("And Supports CONCUR_UPDATABLE");
+                }
+            }
+            if (dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)){
+                //se você estiver navegando e alterarem no banco, ele possibilita de ver o resultado da alteração sem uma nova busca
+                log.info("Supports TYPE_FOWARD_ONLY");
+                if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)){
+                    log.info("And Supports CONCUR_UPDATABLE");
+                }
+            }
         } catch (SQLException e) {
             log.error("Error while trying to update producers", e);
         }
