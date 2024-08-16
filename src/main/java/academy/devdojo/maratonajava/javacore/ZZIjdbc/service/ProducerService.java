@@ -35,6 +35,10 @@ public class ProducerService {
     public static void showProducerMetaData(){
         ProducerRepository.showProducerMetaData();
     }
+
+    public static void showTypeScrollWorking(){
+        ProducerRepository.showTypeScrollWorking();
+    }
     public static void showDriverMetaData(){
         ProducerRepository.showDriverMetadata();
     }
@@ -44,4 +48,6 @@ public class ProducerService {
             throw new IllegalArgumentException("Invalid value for id");
         }
     }
+
+
 }

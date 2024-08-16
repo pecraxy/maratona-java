@@ -24,6 +24,7 @@ public class ConnectionFactoryTest01 {
 //        List<Producer> producers = ProducerService.findByName("Zaza");
 //        log.info(producers);
 //        ProducerService.showProducerMetaData();
-        ProducerService.showDriverMetaData();
+//        ProducerService.showDriverMetaData();
+        ProducerService.showTypeScrollWorking();
     }
 }

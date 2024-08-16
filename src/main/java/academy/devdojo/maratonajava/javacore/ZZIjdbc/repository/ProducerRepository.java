@@ -72,15 +72,7 @@ public class ProducerRepository {
         }
         return producers;
     }
-    public static void showTypeScrollWorking(){
-        String sql = "SELECT id, name FROM anime_store.producer";
-        try (Connection conn = ConnectionFactory.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)){
-        } catch (SQLException e) {
-            log.error("Error while trying to update producers", e);
-        }
-    }
+
 
     public static void showProducerMetaData(){
         log.info("Producer Metadata");
@@ -128,6 +120,54 @@ public class ProducerRepository {
                     log.info("And Supports CONCUR_UPDATABLE");
                 }
             }
+        } catch (SQLException e) {
+            log.error("Error while trying to update producers", e);
+        }
+    }
+
+    public static void showTypeScrollWorking(){
+        String sql = "SELECT id, name FROM anime_store.producer";
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)){
+            log.info("Last row? '{}' ", rs.last()); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("First row? '{}' ", rs.first()); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("Row absolute? '{}' ", rs.absolute(2)); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("Row relative? '{}' ", rs.relative(-1)); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("is last? '{}' ", rs.isLast()); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("Is first? '{}' ", rs.isFirst()); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+
+            log.info("Row absolute? '{}' ", rs.absolute(2)); //baseado na última linha da querie
+            log.info("Row number '{}' ", rs.getRow()); //baseado na última linha da querie
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+
+            log.info("Last row? '{}' ", rs.last()); //baseado na última linha da querie
+            log.info("----------------------");
+            rs.next();
+
+            while(rs.previous()){
+                log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+            }
+
         } catch (SQLException e) {
             log.error("Error while trying to update producers", e);
         }
