@@ -25,6 +25,11 @@ public class ConnectionFactoryTest01 {
 //        log.info(producers);
 //        ProducerService.showProducerMetaData();
 //        ProducerService.showDriverMetaData();
-        ProducerService.showTypeScrollWorking();
+//        ProducerService.showTypeScrollWorking();
+//        List<Producer> producers = ProducerService.findByNameAndUpdateToUpperCase("Dj Blakes Studio");
+//        log.info(producers);
+//        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("Dj Leoo da 17");
+//        log.info(producers);
+        ProducerService.findByNameAndDelete("Dj Leoo da 17");
     }
 }
