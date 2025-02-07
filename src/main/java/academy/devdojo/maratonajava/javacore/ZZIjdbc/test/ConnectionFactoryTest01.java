@@ -16,7 +16,7 @@ public class ConnectionFactoryTest01 {
 
     public static void main(String[] args) {
         Producer producer = Producer.builder().name("Dj Blakes Studio").build();
-        Producer producerToUpdate = Producer.builder().id(1).name("Mari(a)juana Studios").build();
+        Producer producerToUpdate = Producer.builder().id(1).name("Mario e Joanna estudios").build();
 //        ProducerService.save(producer);
 //        ProducerService.delete(5);
 //        ProducerService.update(producerToUpdate);
@@ -31,10 +31,13 @@ public class ConnectionFactoryTest01 {
 //        List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("Dj Leoo da 17");
 //        log.info(producers);
 //        ProducerService.findByNameAndDelete("Dj Leoo da 17");
+//        ProducerRepository.updatePreparedStatement(producerToUpdate);
 
-        List<Producer> producers = ProducerService.findByNamePreparedStatement("");
+//        List<Producer> producers = ProducerService.findByNamePreparedStatement("");
+//        log.info("Producers found '{}'", producers)
+
+        List<Producer> producers = ProducerService.findByNameCallableStatement("Madhouse");
         log.info("Producers found '{}'", producers);
 
-//        ProducerRepository.updatePreparedStatement(producerToUpdate);
     }
 }

@@ -92,12 +92,38 @@ public class ProducerRepository {
         }
         return producers;
     }
+    public static List<Producer> findByNameCallableStatement(String name) {
+        log.info("Finding producer by name");
+        String sql = "CALL anime_store.sp_get_producer_by_name(?);";
+        List<Producer> producers = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = callableStatementFindByName(conn, sql, name);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Producer producer = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                producers.add(producer);
+            }
+        } catch (SQLException e) {
+            log.error("Error while trying to search by name callable statement producers", e);
+        }
+        return producers;
+    }
 
     private static PreparedStatement prepareStatementFindByName(Connection connection, String sql, String name) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, String.format("%%%s%%", name));
         return ps;
     }
+
+    private static PreparedStatement callableStatementFindByName(Connection connection, String sql, String name) throws SQLException {
+        CallableStatement cs = connection.prepareCall(sql);
+        cs.setString(1, name);
+        return cs;
+    }
+
     public static void updatePreparedStatement(Producer producer) {
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement ps = prepareStatementUpdate(conn, producer)) {
