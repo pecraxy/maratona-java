@@ -23,6 +23,8 @@ public class CrudTest01 {
         System.out.println("1. Find by name");
         System.out.println("2. Find All");
         System.out.println("3. Delete producer");
+        System.out.println("4. Save producer");
+        System.out.println("5. Update producer");
         System.out.println("0. Exit");
         System.out.println("------------- ---- ------- -------------");
     }
