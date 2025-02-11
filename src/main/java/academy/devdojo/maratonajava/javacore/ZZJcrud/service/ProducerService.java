@@ -30,7 +30,7 @@ public class ProducerService {
     }
 
 
-    private static void findAll(){
+    static void findAll(){
         System.out.println("----------- Find all -----------");
         ProducerRepository.findAll()
                 .forEach(p -> System.out.printf("ID [%d] | %s%n", p.getId(), p.getName()));
