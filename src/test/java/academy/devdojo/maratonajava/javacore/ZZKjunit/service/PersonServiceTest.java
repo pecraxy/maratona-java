@@ -46,4 +46,5 @@ class PersonServiceTest {
         List<Person> personlist = List.of(new Person(17), new Person(18), new Person(21));
         Assertions.assertEquals(2, personService.filterRemovingNotAdult(personlist).size());
     }
+
 }
